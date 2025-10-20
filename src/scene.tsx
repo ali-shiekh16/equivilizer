@@ -24,7 +24,7 @@ const Test = () => {
       <ambientLight intensity={0.5} />
       <OrbitControls />
       <group position={[0, 0, 2]}>
-              <Track url={'/song.mp3'} color={'#ff5be9'} />
+              <Track url={'/song.mp3'} color={'#41e620'} />
       </group>
 
       <ambientLight intensity={0.3} />
