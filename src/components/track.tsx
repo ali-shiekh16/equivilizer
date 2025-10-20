@@ -37,10 +37,28 @@ function Track({
     x: { value: 0, min: -5, max: 5, step: 0.1 },
     y: { value: 0.1, min: -5, max: 5, step: 0.1 },
     z: { value: 0, min: -5, max: 5, step: 0.1 },
-    rotationY: { value: .21, min: -Math.PI, max: Math.PI, step: 0.01, label: 'Rotation (Y)' },
-    gap: { value: 0.01, min: 0, max: 1, step: 0.01, label: 'Gap/Spacing' },
-    lightSpacing: { value: 2.4, min: 0.1, max: 3, step: 0.1, label: 'Light Spacing' },
-    baseIntensity: { value: 5, min: 0, max: 50, step: 0.1, label: 'Base Intensity' },
+    rotationY: {
+      value: 0.21,
+      min: -Math.PI,
+      max: Math.PI,
+      step: 0.01,
+      label: 'Rotation (Y)',
+    },
+    gap: { value: 0.47, min: 0, max: 1, step: 0.01, label: 'Gap/Spacing' },
+    lightSpacing: {
+      value: 2.4,
+      min: 0.1,
+      max: 3,
+      step: 0.1,
+      label: 'Light Spacing',
+    },
+    baseIntensity: {
+      value: 5,
+      min: 0,
+      max: 50,
+      step: 0.1,
+      label: 'Base Intensity',
+    },
   });
 
   const { gain, context, update, data } = suspend(
@@ -116,7 +134,7 @@ function Track({
         const lightAngle = i * angleStep * lightsControls.lightSpacing;
         const lightX = radius * Math.cos(lightAngle);
         const lightZ = radius * Math.sin(lightAngle);
-        
+
         // Calculate the bar's normal direction (pointing toward center)
         const normalX = -Math.cos(lightAngle);
         const normalZ = -Math.sin(lightAngle);
@@ -131,14 +149,15 @@ function Track({
 
         // Make the light face downward toward the floor for reflections
         // Rotate to point down with a slight tilt toward the bar
-        lightGroup.rotation.set(0, Math.PI / 2 - angle , 0);
+        lightGroup.rotation.set(0, Math.PI / 2 - angle, 0);
 
         // Update light dimensions to match bar
         const rectLight = lightGroup.children[0] as THREE.RectAreaLight;
         if (rectLight) {
           rectLight.width = width;
-          rectLight.height = height * scaleY;
-          rectLight.intensity = lightsControls.baseIntensity * (1 + data[i] / 50);
+          rectLight.height = height * scaleY * 1.8;
+          rectLight.intensity =
+            lightsControls.baseIntensity * (1 + data[i] / 50);
         }
       }
     }

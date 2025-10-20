@@ -20,11 +20,30 @@ const CentralSphere = (
 
   const [emissive] = useTexture(['/texture/sphere-emissive.jpeg']);
 
+  // const helperControls = useControls('Central Sphere Light', {
+  //   showPointHelper: { value: false },
+  // });
+
+  // const pointRef = useRef<THREE.PointLight>(null);
+  // // show helper when toggled
+  // useHelper(
+  //   pointRef as any,
+  //   PointLightHelper,
+  //   helperControls.showPointHelper ? 0.2 : 0
+  // );
+
   return (
     <group {...props}>
+      {/* <pointLight
+        ref={pointRef as any}
+        color={props.color || '#41e620'}
+        intensity={0}
+        position={[0, 0.3, 0]}
+      /> */}
+
       <mesh position={[0, 0.2, 0]} castShadow receiveShadow>
         <sphereGeometry args={[0.2, 32, 32]} />
-        <meshBasicMaterial color={'#000'} />
+        <meshStandardMaterial metalness={0} color={'#333'} />
       </mesh>
 
       <mesh position={[0, 0.2, 0]} castShadow receiveShadow>
